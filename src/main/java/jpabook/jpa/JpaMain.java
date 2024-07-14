@@ -4,9 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
-import jpabook.jpa.domain.Member;
-import jpabook.jpa.domain.Movie;
-import jpabook.jpa.domain.Team;
+import jpabook.jpa.domain.*;
 
 import java.util.List;
 
@@ -21,30 +19,16 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Team team1 = new Team();
-            team1.setName("teamA");
-            em.persist(team1);
+            Child child1 = new Child();
+            Child child2 = new Child();
 
-            Team team2 = new Team();
-            team2.setName("teamB");
-            em.persist(team2);
+            Parent parent = new Parent();
+            parent.addChild(child1);
+            parent.addChild(child2);
 
-            Member member1 = new Member();
-            member1.setUsername("member1");
-            member1.setTeam(team1);
-
-            Member member2 = new Member();
-            member2.setUsername("member2");
-            member2.setTeam(team2);
-
-            em.flush();
-            em.clear();
-
-            List<Member> members = em.createQuery("select m from Member m", Member.class)
-                    .getResultList();
-
-            // SQL: select * from Member;
-            // SQL: select * from Team where TEAM_ID = xxx
+            em.persist(parent);
+            em.persist(child1);
+            em.persist(child2);
 
             tx.commit();
         } catch (Exception e) {
