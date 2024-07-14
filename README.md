@@ -1,2 +1,3 @@
-#JPA Practice
+# JPA Practice
 
+🍀 Studying Entity-Mapping, Inheritance, etc...
