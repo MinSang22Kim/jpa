@@ -15,6 +15,12 @@ public class Member extends BaseEntity {
     @Column(name = "USERNAME")
     private String username;
 
+    @Embedded
+    private Period workPeriod;
+
+    @Embedded
+    private Address homeAddress;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "TEAM_ID", insertable = false, updatable = false)
     private Team team;
